@@ -21,14 +21,14 @@
 #    http://172.17.0.1:8891
 #
 FROM ubuntu:trusty
-MAINTAINER kris@maphubs.com
+MAINTAINER to@alexstep.com
 ENV DEBIAN_FRONTEND noninteractive
 EXPOSE 8891
 
 RUN apt-get update && \
     apt-get -y install git curl && \
     curl -sL https://deb.nodesource.com/setup_4.x | sudo bash - && \
-    apt-get -y install nodejs build-essential xvfb libfontconfig1 firefox && \
+    apt-get -y install nodejs build-essential xvfb libfontconfig1 libc6 libstdc++6 libgcc1 libgtk2.0-0 libasound2 libxrender1 firefox && \
     npm install -g slimerjs@0.9.6-2 && \
     npm install -g phantomjs@1.9.19 && \
     npm install -g alexstep/manet
