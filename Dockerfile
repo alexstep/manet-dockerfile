@@ -10,8 +10,8 @@ ENV DEBIAN_FRONTEND noninteractive
 EXPOSE 8891
 
 RUN apt-get update && \
-    apt-get -y install git curl && \
-    curl -sL https://deb.nodesource.com/setup_4.x | sudo bash - && \
+    apt-get -y install git curl apt-utils && \
+    curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
     apt-get -y install nodejs build-essential xvfb libfontconfig1 libc6 libstdc++6 libgcc1 libgtk2.0-0 libasound2 libxrender1 firefox && \
     npm install -g slimerjs && \
     npm install -g phantomjs && \
