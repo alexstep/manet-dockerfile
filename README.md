@@ -6,7 +6,7 @@ Forked from: https://github.com/openmaphub/manet-dockerfile
 git clone https://github.com/alexstep/manet-dockerfile/
 cd manet-dockerfile
 
-sudo docker build -t alexmanet - < Dockerfile
+sudo docker build -t alexmanet .
 
 sudo docker run --name=manet -d -p=YOUR_SERVER_IP:5577:8891 alexmanet
 </pre>
