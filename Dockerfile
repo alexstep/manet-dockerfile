@@ -1,5 +1,7 @@
 # This is a Dockerfile for creating a Manet container from a base Ubuntu 14:04 image.
 # Forked from: https://github.com/pdelsante/manet-dockerfile
+# and use alexstep manet updates https://github.com/alexstep/manet
+# with this changes https://github.com/vbauer/manet/pull/68
 # Manet's code can be found here: https://github.com/vbauer/manet
 #
 # To use this container, start it as usual:
@@ -24,12 +26,12 @@ ENV DEBIAN_FRONTEND noninteractive
 EXPOSE 8891
 
 RUN apt-get update && \
-    apt-get -y install curl && \
+    apt-get -y install git curl && \
     curl -sL https://deb.nodesource.com/setup_4.x | sudo bash - && \
     apt-get -y install nodejs build-essential xvfb libfontconfig1 firefox && \
     npm install -g slimerjs@0.9.6-2 && \
     npm install -g phantomjs@1.9.19 && \
-    npm install -g manet@0.4.9
+    npm install -g alexstep/manet
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
