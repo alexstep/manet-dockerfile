@@ -8,6 +8,8 @@ cd manet-dockerfile
 
 sudo docker build -t alexmanet - < Dockerfile
 
-sudo docker run --name=manet -d -p=<your_server_ip>:5577:8891 alexmanet
+sudo docker run --name=manet -d -p=YOUR_SERVER_IP:5577:8891 alexmanet
 </pre>
 Open http://your_server_ip:5577
+
+<img src="https://github.com/alexstep/manet-dockerfile/blob/master/screenshot.png?raw=true">
