@@ -19,4 +19,7 @@ RUN apt-get update && \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["/usr/bin/manet --command='/usr/bin/xvfb-run /usr/bin/slimerjs' --level=debug"]
+ADD entrypoint.sh /root/entrypoint.sh
+RUN chmod a+x /root/entrypoint.sh
+
+ENTRYPOINT ["/root/entrypoint.sh"]
