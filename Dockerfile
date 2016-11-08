@@ -4,23 +4,7 @@
 # with this changes https://github.com/vbauer/manet/pull/68
 # Manet's code can be found here: https://github.com/vbauer/manet
 #
-# To use this container, start it as usual:
-#
-#    $ sudo docker run pdelsante/manet
-#
-# Then find out its IP address by running:
-#
-#    $ sudo docker ps
-#    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-#    d1d7165512e2        pdelsante/manet     "/usr/bin/manet"    48 seconds ago      Up 47 seconds       8891/tcp            romantic_cray
-#
-#    $ sudo docker inspect d1d7165512e2 | grep IPAddress
-#         "IPAddress": "172.17.0.1",
-#
-# Now you can connect to:
-#    http://172.17.0.1:8891
-#
-FROM ubuntu:trusty
+FROM ubuntu:16.04
 MAINTAINER to@alexstep.com
 ENV DEBIAN_FRONTEND noninteractive
 EXPOSE 8891
@@ -29,18 +13,10 @@ RUN apt-get update && \
     apt-get -y install git curl && \
     curl -sL https://deb.nodesource.com/setup_4.x | sudo bash - && \
     apt-get -y install nodejs build-essential xvfb libfontconfig1 libc6 libstdc++6 libgcc1 libgtk2.0-0 libasound2 libxrender1 firefox && \
-    npm install -g slimerjs@0.9.6-2 && \
-    npm install -g phantomjs@1.9.19 && \
+    npm install -g slimerjs && \
+    npm install -g phantomjs && \
     npm install -g alexstep/manet
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV DISPLAY=:99
-ADD xvfb_init /etc/init.d/xvfb
-ADD xvfb_daemon_run /usr/bin/xvfb-daemon-run
-RUN chmod a+x /etc/init.d/xvfb && chmod a+x /usr/bin/xvfb-daemon-run
-
-ADD entrypoint.sh /root/entrypoint.sh
-RUN chmod a+x /root/entrypoint.sh
-
-ENTRYPOINT ["/root/entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/manet --command='/usr/bin/xvfb-run /usr/bin/slimerjs' --level=debug"]
